@@ -1,0 +1,15 @@
+<%- include('../partials/navbar') %>
+
+<div class="container">
+    <div class="form-wrapper">
+        <h1>Edit Post</h1>
+        <form action="/posts/<%= post._id %>/edit" method="POST">
+            <input type="text" name="title" placeholder="Title" value="<%= post.title %>" required />
+            <textarea name="content" placeholder="Write your post..." required rows="10"><%= post.content %></textarea>
+            <button type="submit">Update Post</button>
+            <a href="/posts/<%= post._id %>" class="btn" style="background: #475569; margin-top: 10px; text-decoration: none; display: block; text-align: center;">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,19 @@
+<%- include('../partials/navbar') %>
+
+<div class="container">
+    <div class="landing-hero">
+        <h1>Welcome to DevConnect</h1>
+        <p>A place where developers share ideas, build projects, and grow together. Join our community today!</p>
+        
+        <div class="landing-buttons">
+            <% if (locals.user) { %>
+                <a href="/dashboard" class="btn-action">Go to Dashboard</a>
+            <% } else { %>
+                <a href="/auth/register" class="btn-action">Get Started</a>
+                <a href="/auth/login" class="btn-action" style="background: transparent; border: 2px solid var(--white);">Login</a>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

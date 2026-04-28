@@ -1,0 +1,35 @@
+<%- include('../partials/navbar') %>
+
+<div class="container">
+    <h1>Dashboard</h1>
+    <a href="/posts/create" class="create-btn">Create New Post</a>
+
+    <h2>All Posts</h2>
+
+    <div class="posts-list">
+    <% if (posts && posts.length > 0) { %>
+        <% posts.forEach(post => { %>
+            <div class="post-card">
+                <h3><%= post.title %></h3>
+                <p><%= post.content %></p>
+                <p class="post-author">By <%= post.author ? post.author.name : 'Unknown' %></p>
+                
+                <div class="card-actions">
+                    <a href="/posts/<%= post._id %>" class="btn-action">View</a>
+                    
+                    <% if (locals.user && post.author && post.author._id.toString() === locals.user.userId) { %>
+                        <a href="/posts/<%= post._id %>/edit" class="btn-action">Edit</a>
+                        <form action="/posts/<%= post._id %>/delete" method="POST" style="display:inline; padding:0; background:transparent; box-shadow:none; width:auto;">
+                            <button type="submit" class="btn-action btn-delete" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No posts available</p>
+    <% } %>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
