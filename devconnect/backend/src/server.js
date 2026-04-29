@@ -1,14 +1,22 @@
-require('dotenv').config(); // MUST BE FIRST
+require("dotenv").config();
+
 const mongoose = require("mongoose");
-const app=require('./app');
+const app = require("./app");
 
+// ENV variables
+const PORT = process.env.PORT || 4000;
+const MONGO_URL = process.env.MONGO_URL;
 
-console.log("MONGO_URL:", process.env.MONGO_URL);
+// DB connect + server start
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(MONGO_URL)
   .then(() => {
-    app.listen(4000, () => {
-      console.log("Server running on http://localhost:4000");
+    console.log("MongoDB connected");
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.error("DB connection error:", err);
+  });
