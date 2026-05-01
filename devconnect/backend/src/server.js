@@ -7,7 +7,15 @@ const app = require("./app");
 const PORT = process.env.PORT || 4000;
 const MONGO_URL = process.env.MONGO_URL;
 
+console.log("MONGO_URL:", process.env.MONGO_URL);
+
 // DB connect + server start
+if (!MONGO_URL) {
+  console.error("Error: MONGO_URL environment variable is not defined.");
+  process.exit(1);
+}
+
+
 mongoose
   .connect(MONGO_URL)
   .then(() => {
